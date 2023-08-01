@@ -13,7 +13,21 @@ class Todo extends Model
 
     public function scopeSubTodos()
     {
-        $this->whereNot('parent_id', null);
+        return $this->whereNot('parent_id', null);
     }
 
+    public function parentTodo()
+    {
+        return $this->belongsTo(Todo::class, 'parent_id', 'id');
+    }
+
+    public function owner()
+    {
+        return $this->belongsTo(User::class, 'created_by', 'id');
+    }
+
+    public function subTodos()
+    {
+        return $this->hasMany(Todo::class, 'parent_id', 'id');
+    }
 }

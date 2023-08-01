@@ -20,7 +20,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->dateTime('datetime_start');
             $table->dateTime('datetime_end');
-            $table->foreignIdFor(User::class, 'updated_by');
+            $table->foreignIdFor(User::class, 'updated_by')->nullable();
             $table->foreignIdFor(User::class, 'created_by');
             $table->timestamps();
         });
