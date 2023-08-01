@@ -11,7 +11,9 @@ services:
       - 8000:80
     depends_on:
       - db
-    
+    networks:
+      - todo-app
+
   db:
     image: mysql:8.0.34
     ports:
@@ -24,3 +26,9 @@ services:
       MYSQL_USER: '${DB_USERNAME:-dbuser}'
       MYSQL_PASSWORD: '${DB_PASSWORD:-password}'
       MYSQL_ALLOW_EMPTY_PASSWORD: 1
+    networks:
+      - todo-app
+
+networks:
+  todo-app:
+    driver: bridge

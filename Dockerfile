@@ -3,6 +3,8 @@ FROM php:8.1.22RC1-apache
 RUN set -ex; \
     apt-get update; \
     apt-get install -y --no-install-recommends \
+    php8.1-gd \
+    php8.1-mysql \
     libpng-dev \
     libjpeg-dev \
     libfreetype6-dev \
@@ -10,7 +12,9 @@ RUN set -ex; \
     unzip \
     gnupg \
     && apt-get clean; \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* 
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+RUN docker-php-ext-install mysqli pdo pdo_mysql
 
 RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
     && apt-get install -y nodejs \
